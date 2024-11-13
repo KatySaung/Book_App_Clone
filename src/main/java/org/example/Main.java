@@ -15,8 +15,8 @@ public class Main {
         String jwtExpirationStr = dotenv.get("JWT_EXPIRATION_TIME");
         Long jwtExpiration = Long.parseLong(jwtExpirationStr);
 
-        System.out.println("Secret Key: " + secretKey);
-        System.out.println("JWT Expire: " + jwtExpiration);
+//        System.out.println("Secret Key: " + secretKey);
+//        System.out.println("JWT Expire: " + jwtExpiration);
 
     }
 }
