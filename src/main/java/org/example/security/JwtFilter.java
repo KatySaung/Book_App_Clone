@@ -17,9 +17,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
-
     private final JwtService jwtService;
-
 
     @Override
     protected void doFilterInternal(
@@ -39,7 +37,7 @@ public class JwtFilter extends OncePerRequestFilter {
             return;
         }
         jwt = authHeader.substring(7);
-        userEmail = jwtService.extractUsername(jwt);
+       // userEmail = jwtService.extractUsername(jwt);
 
     }
 }

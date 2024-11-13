@@ -3,6 +3,8 @@ package org.example.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -14,17 +16,20 @@ import java.util.Map;
 
 @Service
 public class JwtService {
+    @Value("${JWT_EXPIRATION_TIME}")
     private Long jwtExpiration;
+
+    @Value("${JWT_SECRET_KEY}")
     private String secretKey;
 
     public String generateToken(UserDetails userDetails){
+
         return generateToken(new HashMap<>(), userDetails);
     }
 
     private String generateToken(
             Map<String, Object> claims,
             UserDetails userDetails) {
-
         return buildToken(claims, userDetails, jwtExpiration);
     }
 
@@ -51,7 +56,7 @@ public class JwtService {
 
     private Key getSignInKey(){
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
-        return null;
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 
 
